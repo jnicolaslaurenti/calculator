@@ -19,4 +19,5 @@
     <string name="activity_main_calculator_add_text">+</string>
     <string name="activity_main_calculator_result_text">Result</string>
     <string name="content_description_icon_calculator">icon_calculator</string>
+
 </resources>

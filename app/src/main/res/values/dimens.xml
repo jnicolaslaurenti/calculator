@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <dimen name="guideline_begin">60dp</dimen>
     <dimen name="guideline_title">120dp</dimen>
     <dimen name="margin_bottom_result_xbig">50dp</dimen>
