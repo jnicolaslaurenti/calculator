@@ -15,14 +15,4 @@ public class ActivityView {
         activityRef = new WeakReference<>(activity);
     }
 
-    @Nullable
-    public Activity getActivity() {
-        return activityRef.get();
-    }
-
-    @Nullable
-    public Context getContext() {
-        return getActivity();
-    }
-
 }

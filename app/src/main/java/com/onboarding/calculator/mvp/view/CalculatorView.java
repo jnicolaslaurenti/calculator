@@ -13,7 +13,7 @@ public class CalculatorView extends ActivityView {
         this.binding = binding;
     }
 
-    public void showValues(String value){
+    public void showValues(String value) {
         binding.textViewResult.setText(value);
     }
 }

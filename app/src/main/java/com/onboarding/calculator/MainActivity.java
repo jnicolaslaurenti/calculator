@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setListeners();
     }
 
-    private void setListeners(){
+    private void setListeners() {
         binding.buttonAdd.setOnClickListener(view -> presenter.onCalculatorButtonPressed(binding.buttonAdd.getText().toString()));
         binding.buttonSubtraction.setOnClickListener(view -> presenter.onCalculatorButtonPressed(binding.buttonSubtraction.getText().toString()));
         binding.buttonMultiply.setOnClickListener(view -> presenter.onCalculatorButtonPressed(binding.buttonMultiply.getText().toString()));
@@ -41,6 +41,5 @@ public class MainActivity extends AppCompatActivity {
         binding.buttonNine.setOnClickListener(view -> presenter.onCalculatorButtonPressed(binding.buttonNine.getText().toString()));
         binding.buttonEquals.setOnClickListener(view -> presenter.onCalculatorButtonPressed(binding.buttonEquals.getText().toString()));
     }
-
 
 }
