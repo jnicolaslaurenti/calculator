@@ -15,6 +15,7 @@ public class CalculatorView extends ActivityView implements CalculatorContract.V
         this.binding = binding;
     }
 
+    @Override
     public void showValues(String value) {
         binding.textViewResult.setText(value);
     }

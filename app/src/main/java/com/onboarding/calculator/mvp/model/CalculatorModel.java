@@ -47,6 +47,7 @@ public class CalculatorModel implements CalculatorContract.Model {
         secondOperand = EMPTY_STRING;
     }
 
+    @Override
     public void setValues(String value) {
         switch (value) {
             case EQUAL:
@@ -69,6 +70,7 @@ public class CalculatorModel implements CalculatorContract.Model {
         }
     }
 
+    @Override
     public String getLastModified() {
         if (!operator.isEmpty() && secondOperand.isEmpty()) {
             return operator;
