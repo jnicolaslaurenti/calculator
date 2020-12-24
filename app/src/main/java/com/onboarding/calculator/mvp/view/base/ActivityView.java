@@ -1,4 +1,4 @@
-package com.onboarding.calculator.mvp.view;
+package com.onboarding.calculator.mvp.view.base;
 
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -15,4 +15,13 @@ public class ActivityView {
         activityRef = new WeakReference<>(activity);
     }
 
+    @Nullable
+    public Activity getActivity() {
+        return activityRef.get();
+    }
+
+    @Nullable
+    public Context getContext() {
+        return getActivity();
+    }
 }

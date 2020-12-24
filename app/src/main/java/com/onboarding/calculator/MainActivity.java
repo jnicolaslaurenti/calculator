@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.onboarding.calculator.databinding.ActivityMainBinding;
+import com.onboarding.calculator.mvp.contract.CalculatorContract;
 import com.onboarding.calculator.mvp.model.CalculatorModel;
 import com.onboarding.calculator.mvp.presenter.CalculatorPresenter;
 import com.onboarding.calculator.mvp.view.CalculatorView;
@@ -12,7 +13,7 @@ import com.onboarding.calculator.mvp.view.CalculatorView;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private CalculatorPresenter presenter;
+    private CalculatorContract.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

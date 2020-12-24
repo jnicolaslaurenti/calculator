@@ -1,51 +1,50 @@
 package com.onboarding.calculator.mvp.model;
 
-import static com.onboarding.calculator.util.Util.ADD;
-import static com.onboarding.calculator.util.Util.CLEAN;
-import static com.onboarding.calculator.util.Util.DIV;
-import static com.onboarding.calculator.util.Util.EMPTY_STRING;
-import static com.onboarding.calculator.util.Util.EQUAL;
-import static com.onboarding.calculator.util.Util.MUL;
-import static com.onboarding.calculator.util.Util.OPERAND1;
-import static com.onboarding.calculator.util.Util.OPERAND2;
-import static com.onboarding.calculator.util.Util.SUB;
+import com.onboarding.calculator.mvp.contract.CalculatorContract;
 
-public class CalculatorModel {
+import static com.onboarding.calculator.util.ConstantsUtils.ADD;
+import static com.onboarding.calculator.util.ConstantsUtils.CLEAN;
+import static com.onboarding.calculator.util.ConstantsUtils.DIV;
+import static com.onboarding.calculator.util.ConstantsUtils.EMPTY_STRING;
+import static com.onboarding.calculator.util.ConstantsUtils.EQUAL;
+import static com.onboarding.calculator.util.ConstantsUtils.MUL;
+import static com.onboarding.calculator.util.ConstantsUtils.FIRST_OPERAND;
+import static com.onboarding.calculator.util.ConstantsUtils.SECOND_OPERAND;
+import static com.onboarding.calculator.util.ConstantsUtils.SUB;
 
-    private String operator;
-    private String operand1;
-    private String operand2;
-    private int switchOp;
+public class CalculatorModel implements CalculatorContract.Model {
 
-    public CalculatorModel() {
-        reset();
-    }
+    private String operator = EMPTY_STRING;
+    private String firstOperand = EMPTY_STRING;
+    private String secondOperand = EMPTY_STRING;
+    private int switchOp = FIRST_OPERAND;
 
     private void switchOperand() {
-        if (switchOp == OPERAND2)
-            switchOp = OPERAND1;
-        else
-            switchOp = OPERAND2;
+        if (switchOp == SECOND_OPERAND) {
+            switchOp = FIRST_OPERAND;
+        } else {
+            switchOp = SECOND_OPERAND;
+        }
     }
 
     private void addOperand(String value) {
         switch (switchOp) {
-            case OPERAND1: {
-                operand1 += value;
+            case FIRST_OPERAND: {
+                firstOperand += value;
                 break;
             }
-            case OPERAND2: {
-                operand2 += value;
+            case SECOND_OPERAND: {
+                secondOperand += value;
                 break;
             }
         }
     }
 
     private void reset() {
-        switchOp = OPERAND1;
+        switchOp = FIRST_OPERAND;
         operator = EMPTY_STRING;
-        operand1 = EMPTY_STRING;
-        operand2 = EMPTY_STRING;
+        firstOperand = EMPTY_STRING;
+        secondOperand = EMPTY_STRING;
     }
 
     public void setValues(String value) {
@@ -63,20 +62,21 @@ public class CalculatorModel {
                 switchOperand();
                 break;
             }
-            default:
+            default: {
                 addOperand(value);
                 break;
+            }
         }
     }
 
-    public String getResult() {
-        if (!operator.isEmpty() && (operand2.isEmpty())) {
+    public String getLastModified() {
+        if (!operator.isEmpty() && secondOperand.isEmpty()) {
             return operator;
         } else {
-            if (switchOp == OPERAND1) {
-                return operand1;
+            if (switchOp == FIRST_OPERAND) {
+                return firstOperand;
             } else {
-                return operand2;
+                return secondOperand;
             }
         }
     }
