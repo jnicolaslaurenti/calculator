@@ -12,6 +12,7 @@ public class ConstantsUtils {
     public static final String ZERO_STRING = "0";
     public static final int FIRST_OPERAND = 1;
     public static final int SECOND_OPERAND = 2;
+    public static final int ZERO_INT = 0;
     public static final double ZERO_DOUBLE = 0.0;
 
 }

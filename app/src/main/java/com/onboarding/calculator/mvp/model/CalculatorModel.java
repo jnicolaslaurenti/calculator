@@ -1,6 +1,7 @@
 package com.onboarding.calculator.mvp.model;
 
 import com.onboarding.calculator.mvp.contract.CalculatorContract;
+
 import static com.onboarding.calculator.util.ConstantsUtils.ADD;
 import static com.onboarding.calculator.util.ConstantsUtils.CLEAN;
 import static com.onboarding.calculator.util.ConstantsUtils.DIV;
@@ -10,6 +11,7 @@ import static com.onboarding.calculator.util.ConstantsUtils.MUL;
 import static com.onboarding.calculator.util.ConstantsUtils.SECOND_OPERAND;
 import static com.onboarding.calculator.util.ConstantsUtils.SUB;
 import static com.onboarding.calculator.util.ConstantsUtils.ZERO_DOUBLE;
+import static com.onboarding.calculator.util.ConstantsUtils.ZERO_INT;
 import static com.onboarding.calculator.util.ConstantsUtils.ZERO_STRING;
 
 public class CalculatorModel implements CalculatorContract.Model {
@@ -76,12 +78,12 @@ public class CalculatorModel implements CalculatorContract.Model {
         } else
             switch (switchOp) {
                 case FIRST_OPERAND: {
-                    if (firstOperand.length()>0) {
+                    if (firstOperand.length() > ZERO_INT) {
                         firstOperand = firstOperand.substring(0, firstOperand.length() - 1);
                     }
                 }
                 case SECOND_OPERAND: {
-                    if (secondOperand.length()>0) {
+                    if (secondOperand.length() > ZERO_INT) {
                         secondOperand = secondOperand.substring(0, secondOperand.length() - 1);
                     }
                 }
