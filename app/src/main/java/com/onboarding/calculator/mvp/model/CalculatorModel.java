@@ -4,14 +4,15 @@ import com.onboarding.calculator.mvp.contract.CalculatorContract;
 
 import static com.onboarding.calculator.util.ConstantsUtils.ADD;
 import static com.onboarding.calculator.util.ConstantsUtils.CLEAN;
+import static com.onboarding.calculator.util.ConstantsUtils.CORRECTION_FACTOR;
+import static com.onboarding.calculator.util.ConstantsUtils.DEFAULT_RESULT;
 import static com.onboarding.calculator.util.ConstantsUtils.DIV;
+import static com.onboarding.calculator.util.ConstantsUtils.EMPTY_OPERAND;
 import static com.onboarding.calculator.util.ConstantsUtils.EMPTY_STRING;
 import static com.onboarding.calculator.util.ConstantsUtils.FIRST_OPERAND;
 import static com.onboarding.calculator.util.ConstantsUtils.MUL;
 import static com.onboarding.calculator.util.ConstantsUtils.SECOND_OPERAND;
 import static com.onboarding.calculator.util.ConstantsUtils.SUB;
-import static com.onboarding.calculator.util.ConstantsUtils.ZERO_DOUBLE;
-import static com.onboarding.calculator.util.ConstantsUtils.ZERO_INT;
 import static com.onboarding.calculator.util.ConstantsUtils.ZERO_STRING;
 
 public class CalculatorModel implements CalculatorContract.Model {
@@ -78,21 +79,23 @@ public class CalculatorModel implements CalculatorContract.Model {
         } else
             switch (switchOp) {
                 case FIRST_OPERAND: {
-                    if (firstOperand.length() > ZERO_INT) {
-                        firstOperand = firstOperand.substring(0, firstOperand.length() - 1);
+                    if (firstOperand.length() > EMPTY_OPERAND) {
+                        firstOperand = firstOperand.substring(EMPTY_OPERAND, firstOperand.length() - CORRECTION_FACTOR);
                     }
+                    break;
                 }
                 case SECOND_OPERAND: {
-                    if (secondOperand.length() > ZERO_INT) {
-                        secondOperand = secondOperand.substring(0, secondOperand.length() - 1);
+                    if (secondOperand.length() > EMPTY_OPERAND) {
+                        secondOperand = secondOperand.substring(EMPTY_OPERAND, secondOperand.length() - CORRECTION_FACTOR);
                     }
+                    break;
                 }
             }
     }
 
     @Override
     public Double getResult() {
-        Double result = ZERO_DOUBLE;
+        Double result = DEFAULT_RESULT;
         switch (operator) {
             case ADD: {
                 result = Double.parseDouble(firstOperand) + Double.parseDouble(secondOperand);
@@ -107,17 +110,13 @@ public class CalculatorModel implements CalculatorContract.Model {
                 break;
             }
             case DIV: {
-                try {
-                    if (!secondOperand.equals(ZERO_STRING)) {
-                        result = Double.parseDouble(firstOperand) / Double.parseDouble(secondOperand);
-                    } else {
-                        result = null;
-                    }
-                } catch (Exception exception) {
+                if (!secondOperand.equals(ZERO_STRING)) {
+                    result = Double.parseDouble(firstOperand) / Double.parseDouble(secondOperand);
+                } else {
                     result = null;
                 }
-                break;
             }
+            break;
         }
         reset();
         return result;

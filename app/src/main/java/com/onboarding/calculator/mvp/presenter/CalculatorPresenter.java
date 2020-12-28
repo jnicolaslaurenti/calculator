@@ -1,4 +1,5 @@
 package com.onboarding.calculator.mvp.presenter;
+
 import com.onboarding.calculator.mvp.contract.CalculatorContract;
 
 public class CalculatorPresenter implements CalculatorContract.Presenter {
@@ -19,7 +20,7 @@ public class CalculatorPresenter implements CalculatorContract.Presenter {
 
     @Override
     public void onEqualsButtonPressed() {
-        Double result= model.getResult();
+        Double result = model.getResult();
         if (result != null) {
             view.showValues(result.toString());
         } else {
@@ -38,10 +39,10 @@ public class CalculatorPresenter implements CalculatorContract.Presenter {
 
     @Override
     public boolean delete() {
-       model.delete();
-       view.showValues(model.getLastModified());
-       view.showDeleteMessage();
-       return true;
+        model.delete();
+        view.showValues(model.getLastModified());
+        view.showDeleteMessage();
+        return true;
     }
 
 }

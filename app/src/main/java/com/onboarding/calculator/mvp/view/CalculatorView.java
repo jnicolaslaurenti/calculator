@@ -1,14 +1,13 @@
 package com.onboarding.calculator.mvp.view;
 
 import android.app.Activity;
+import android.content.Context;
 import android.widget.Toast;
 
 import com.onboarding.calculator.R;
 import com.onboarding.calculator.databinding.ActivityMainBinding;
 import com.onboarding.calculator.mvp.contract.CalculatorContract;
 import com.onboarding.calculator.mvp.view.base.ActivityView;
-import static com.onboarding.calculator.util.ConstantsUtils.MESSAGE_DELETE_ALL;
-import static com.onboarding.calculator.util.ConstantsUtils.MESSAGE_DELETE_VALUE;
 
 public class CalculatorView extends ActivityView implements CalculatorContract.View {
 
@@ -30,11 +29,18 @@ public class CalculatorView extends ActivityView implements CalculatorContract.V
     }
 
     @Override
-    public void showDeleteAllMessage(){
-        Toast.makeText(getContext(),MESSAGE_DELETE_ALL,Toast.LENGTH_LONG).show();
+    public void showDeleteAllMessage() {
+        Context context = getContext();
+        if (context != null) {
+            Toast.makeText(context, context.getString(R.string.operation_deleted), Toast.LENGTH_LONG).show();
+        }
     }
+
     @Override
-    public void showDeleteMessage(){
-        Toast.makeText(getContext(),MESSAGE_DELETE_VALUE,Toast.LENGTH_LONG).show();
+    public void showDeleteMessage() {
+        Context context = getContext();
+        if (context != null) {
+            Toast.makeText(context, context.getString(R.string.value_deleted), Toast.LENGTH_LONG).show();
+        }
     }
 }
