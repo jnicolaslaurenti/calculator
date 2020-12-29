@@ -30,19 +30,17 @@ public class CalculatorPresenter implements CalculatorContract.Presenter {
     }
 
     @Override
-    public boolean deleteAll() {
+    public void deleteAll() {
         model.reset();
         view.showValues(model.getLastModified());
         view.showDeleteAllMessage();
-        return true;
     }
 
     @Override
-    public boolean delete() {
+    public void delete() {
         model.delete();
         view.showValues(model.getLastModified());
         view.showDeleteMessage();
-        return true;
     }
 
 }

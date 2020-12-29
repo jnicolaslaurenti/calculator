@@ -29,9 +29,9 @@ public interface CalculatorContract {
 
         void onEqualsButtonPressed();
 
-        boolean deleteAll();
+        void deleteAll();
 
-        boolean delete();
+        void delete();
     }
 
 }

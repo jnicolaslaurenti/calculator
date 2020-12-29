@@ -42,7 +42,10 @@ public class MainActivity extends AppCompatActivity {
         binding.buttonNine.setOnClickListener(view -> presenter.onCalculatorButtonPressed(binding.buttonNine.getText().toString()));
         binding.buttonEquals.setOnClickListener(view -> presenter.onEqualsButtonPressed());
         binding.buttonClean.setOnClickListener(view -> presenter.delete());
-        binding.buttonClean.setOnLongClickListener(view -> presenter.deleteAll());
+        binding.buttonClean.setOnLongClickListener(view -> {
+            presenter.deleteAll();
+            return true;
+        });
     }
 
 }
