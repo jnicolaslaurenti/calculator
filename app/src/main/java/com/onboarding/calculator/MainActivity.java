@@ -1,8 +1,8 @@
 package com.onboarding.calculator;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.onboarding.calculator.databinding.ActivityMainBinding;
 import com.onboarding.calculator.mvp.contract.CalculatorContract;
@@ -40,7 +40,12 @@ public class MainActivity extends AppCompatActivity {
         binding.buttonSeven.setOnClickListener(view -> presenter.onCalculatorButtonPressed(binding.buttonSeven.getText().toString()));
         binding.buttonEight.setOnClickListener(view -> presenter.onCalculatorButtonPressed(binding.buttonEight.getText().toString()));
         binding.buttonNine.setOnClickListener(view -> presenter.onCalculatorButtonPressed(binding.buttonNine.getText().toString()));
-        binding.buttonEquals.setOnClickListener(view -> presenter.onCalculatorButtonPressed(binding.buttonEquals.getText().toString()));
+        binding.buttonEquals.setOnClickListener(view -> presenter.onEqualsButtonPressed());
+        binding.buttonClean.setOnClickListener(view -> presenter.delete());
+        binding.buttonClean.setOnLongClickListener(view -> {
+            presenter.deleteAll();
+            return true;
+        });
     }
 
 }

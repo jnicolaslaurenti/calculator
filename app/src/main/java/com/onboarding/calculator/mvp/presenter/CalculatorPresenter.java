@@ -1,13 +1,11 @@
 package com.onboarding.calculator.mvp.presenter;
 
 import com.onboarding.calculator.mvp.contract.CalculatorContract;
-import com.onboarding.calculator.mvp.model.CalculatorModel;
-import com.onboarding.calculator.mvp.view.CalculatorView;
 
 public class CalculatorPresenter implements CalculatorContract.Presenter {
 
-    private CalculatorContract.Model model;
-    private CalculatorContract.View view;
+    private final CalculatorContract.Model model;
+    private final CalculatorContract.View view;
 
     public CalculatorPresenter(CalculatorContract.Model model, CalculatorContract.View view) {
         this.model = model;
@@ -18,6 +16,31 @@ public class CalculatorPresenter implements CalculatorContract.Presenter {
     public void onCalculatorButtonPressed(String buttonText) {
         model.setValues(buttonText);
         view.showValues(model.getLastModified());
+    }
+
+    @Override
+    public void onEqualsButtonPressed() {
+        Double result = model.getResult();
+        if (result != null) {
+            view.showValues(result.toString());
+        } else {
+            view.showError();
+        }
+
+    }
+
+    @Override
+    public void deleteAll() {
+        model.reset();
+        view.showValues(model.getLastModified());
+        view.showDeleteAllMessage();
+    }
+
+    @Override
+    public void delete() {
+        model.delete();
+        view.showValues(model.getLastModified());
+        view.showDeleteMessage();
     }
 
 }

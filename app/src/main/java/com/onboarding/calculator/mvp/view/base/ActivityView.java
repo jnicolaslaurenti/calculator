@@ -1,7 +1,6 @@
 package com.onboarding.calculator.mvp.view.base;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Context;
 
 import androidx.annotation.Nullable;

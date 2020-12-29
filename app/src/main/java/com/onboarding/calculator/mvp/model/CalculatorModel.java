@@ -4,13 +4,16 @@ import com.onboarding.calculator.mvp.contract.CalculatorContract;
 
 import static com.onboarding.calculator.util.ConstantsUtils.ADD;
 import static com.onboarding.calculator.util.ConstantsUtils.CLEAN;
+import static com.onboarding.calculator.util.ConstantsUtils.CORRECTION_FACTOR;
+import static com.onboarding.calculator.util.ConstantsUtils.DEFAULT_RESULT;
 import static com.onboarding.calculator.util.ConstantsUtils.DIV;
+import static com.onboarding.calculator.util.ConstantsUtils.EMPTY_OPERAND;
 import static com.onboarding.calculator.util.ConstantsUtils.EMPTY_STRING;
-import static com.onboarding.calculator.util.ConstantsUtils.EQUAL;
-import static com.onboarding.calculator.util.ConstantsUtils.MUL;
 import static com.onboarding.calculator.util.ConstantsUtils.FIRST_OPERAND;
+import static com.onboarding.calculator.util.ConstantsUtils.MUL;
 import static com.onboarding.calculator.util.ConstantsUtils.SECOND_OPERAND;
 import static com.onboarding.calculator.util.ConstantsUtils.SUB;
+import static com.onboarding.calculator.util.ConstantsUtils.ZERO_STRING;
 
 public class CalculatorModel implements CalculatorContract.Model {
 
@@ -40,7 +43,8 @@ public class CalculatorModel implements CalculatorContract.Model {
         }
     }
 
-    private void reset() {
+    @Override
+    public void reset() {
         switchOp = FIRST_OPERAND;
         operator = EMPTY_STRING;
         firstOperand = EMPTY_STRING;
@@ -50,9 +54,8 @@ public class CalculatorModel implements CalculatorContract.Model {
     @Override
     public void setValues(String value) {
         switch (value) {
-            case EQUAL:
             case CLEAN: {
-                reset();
+                delete();
                 break;
             }
             case ADD:
@@ -70,6 +73,55 @@ public class CalculatorModel implements CalculatorContract.Model {
         }
     }
 
+    public void delete() {
+        if (!operator.isEmpty() && secondOperand.isEmpty()) {
+            operator = EMPTY_STRING;
+        } else
+            switch (switchOp) {
+                case FIRST_OPERAND: {
+                    if (firstOperand.length() > EMPTY_OPERAND) {
+                        firstOperand = firstOperand.substring(EMPTY_OPERAND, firstOperand.length() - CORRECTION_FACTOR);
+                    }
+                    break;
+                }
+                case SECOND_OPERAND: {
+                    if (secondOperand.length() > EMPTY_OPERAND) {
+                        secondOperand = secondOperand.substring(EMPTY_OPERAND, secondOperand.length() - CORRECTION_FACTOR);
+                    }
+                    break;
+                }
+            }
+    }
+
+    @Override
+    public Double getResult() {
+        Double result = DEFAULT_RESULT;
+        switch (operator) {
+            case ADD: {
+                result = Double.parseDouble(firstOperand) + Double.parseDouble(secondOperand);
+                break;
+            }
+            case SUB: {
+                result = Double.parseDouble(firstOperand) - Double.parseDouble(secondOperand);
+                break;
+            }
+            case MUL: {
+                result = Double.parseDouble(firstOperand) * Double.parseDouble(secondOperand);
+                break;
+            }
+            case DIV: {
+                if (!secondOperand.equals(ZERO_STRING)) {
+                    result = Double.parseDouble(firstOperand) / Double.parseDouble(secondOperand);
+                } else {
+                    result = null;
+                }
+            }
+            break;
+        }
+        reset();
+        return result;
+    }
+
     @Override
     public String getLastModified() {
         if (!operator.isEmpty() && secondOperand.isEmpty()) {
@@ -83,5 +135,3 @@ public class CalculatorModel implements CalculatorContract.Model {
         }
     }
 }
-
-
