@@ -13,6 +13,7 @@ import static com.onboarding.calculator.util.ConstantsUtils.FIRST_OPERAND;
 import static com.onboarding.calculator.util.ConstantsUtils.MUL;
 import static com.onboarding.calculator.util.ConstantsUtils.SECOND_OPERAND;
 import static com.onboarding.calculator.util.ConstantsUtils.SUB;
+import static com.onboarding.calculator.util.ConstantsUtils.ZERO_RESULT_STRING;
 import static com.onboarding.calculator.util.ConstantsUtils.ZERO_STRING;
 
 public class CalculatorModel implements CalculatorContract.Model {
@@ -23,21 +24,30 @@ public class CalculatorModel implements CalculatorContract.Model {
     private int switchOp = FIRST_OPERAND;
 
     private void switchOperand() {
-        if (switchOp == SECOND_OPERAND) {
-            switchOp = FIRST_OPERAND;
-        } else {
+        if (switchOp == FIRST_OPERAND) {
             switchOp = SECOND_OPERAND;
+        } else {
+            switchOp = FIRST_OPERAND;
         }
+
     }
 
     private void addOperand(String value) {
         switch (switchOp) {
             case FIRST_OPERAND: {
-                firstOperand += value;
+                if (!firstOperand.equals(ZERO_RESULT_STRING)) {
+                    firstOperand += value;
+                } else {
+                    firstOperand = value;
+                }
                 break;
             }
             case SECOND_OPERAND: {
-                secondOperand += value;
+                if (!secondOperand.equals(ZERO_RESULT_STRING)) {
+                    secondOperand += value;
+                } else {
+                    secondOperand = value;
+                }
                 break;
             }
         }
@@ -53,23 +63,20 @@ public class CalculatorModel implements CalculatorContract.Model {
 
     @Override
     public void setValues(String value) {
-        switch (value) {
-            case CLEAN: {
-                delete();
-                break;
-            }
-            case ADD:
-            case SUB:
-            case DIV:
-            case MUL: {
-                operator = value;
-                switchOperand();
-                break;
-            }
-            default: {
-                addOperand(value);
-                break;
-            }
+        if (value.equals(CLEAN)) {
+            delete();
+        } else {
+            addOperand(value);
+        }
+
+    }
+
+    public void setOperator(String operator) {
+        if (this.operator.equals(EMPTY_STRING)) {
+            switchOperand();
+        }
+        if (!firstOperand.equals(EMPTY_STRING)) {
+            this.operator = operator;
         }
     }
 
@@ -96,42 +103,52 @@ public class CalculatorModel implements CalculatorContract.Model {
     @Override
     public Double getResult() {
         Double result = DEFAULT_RESULT;
-        switch (operator) {
-            case ADD: {
-                result = Double.parseDouble(firstOperand) + Double.parseDouble(secondOperand);
-                break;
-            }
-            case SUB: {
-                result = Double.parseDouble(firstOperand) - Double.parseDouble(secondOperand);
-                break;
-            }
-            case MUL: {
-                result = Double.parseDouble(firstOperand) * Double.parseDouble(secondOperand);
-                break;
-            }
-            case DIV: {
-                if (!secondOperand.equals(ZERO_STRING)) {
-                    result = Double.parseDouble(firstOperand) / Double.parseDouble(secondOperand);
-                } else {
-                    result = null;
+        if (!firstOperand.equals(EMPTY_STRING)) {
+            result = Double.parseDouble(firstOperand);
+        }
+        if (!firstOperand.equals(EMPTY_STRING) && !secondOperand.equals(EMPTY_STRING)) {
+            switch (operator) {
+                case ADD: {
+                    result = Double.parseDouble(firstOperand) + Double.parseDouble(secondOperand);
+                    break;
+                }
+                case SUB: {
+                    result = Double.parseDouble(firstOperand) - Double.parseDouble(secondOperand);
+                    break;
+                }
+                case MUL: {
+                    result = Double.parseDouble(firstOperand) * Double.parseDouble(secondOperand);
+                    break;
+                }
+                case DIV: {
+                    if (!secondOperand.equals(ZERO_STRING)) {
+                        result = Double.parseDouble(firstOperand) / Double.parseDouble(secondOperand);
+                    } else {
+                        result = null;
+                    }
+                    break;
+                }
+                case EMPTY_STRING: {
+                    result = Double.parseDouble(firstOperand);
+                    break;
                 }
             }
-            break;
         }
         reset();
         return result;
     }
 
     @Override
+    public String getOperator() {
+        return operator;
+    }
+
+    @Override
     public String getLastModified() {
-        if (!operator.isEmpty() && secondOperand.isEmpty()) {
-            return operator;
+        if (switchOp == FIRST_OPERAND) {
+            return firstOperand;
         } else {
-            if (switchOp == FIRST_OPERAND) {
-                return firstOperand;
-            } else {
-                return secondOperand;
-            }
+            return secondOperand;
         }
     }
 }

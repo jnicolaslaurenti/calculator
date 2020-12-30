@@ -9,6 +9,8 @@ import com.onboarding.calculator.databinding.ActivityMainBinding;
 import com.onboarding.calculator.mvp.contract.CalculatorContract;
 import com.onboarding.calculator.mvp.view.base.ActivityView;
 
+import static com.onboarding.calculator.util.ConstantsUtils.RESULT;
+
 public class CalculatorView extends ActivityView implements CalculatorContract.View {
 
     private final ActivityMainBinding binding;
@@ -29,10 +31,15 @@ public class CalculatorView extends ActivityView implements CalculatorContract.V
     }
 
     @Override
+    public void showOperator(String value) {
+        binding.textViewResult.setText(value);
+    }
+
+    @Override
     public void showDeleteAllMessage() {
         Context context = getContext();
         if (context != null) {
-            Toast.makeText(context, context.getString(R.string.operation_deleted), Toast.LENGTH_LONG).show();
+            Toast.makeText(context, context.getString(R.string.operation_deleted), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -40,7 +47,11 @@ public class CalculatorView extends ActivityView implements CalculatorContract.V
     public void showDeleteMessage() {
         Context context = getContext();
         if (context != null) {
-            Toast.makeText(context, context.getString(R.string.value_deleted), Toast.LENGTH_LONG).show();
+            Toast.makeText(context, context.getString(R.string.value_deleted), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void reset() {
+        binding.textViewResult.setText(RESULT);
     }
 }
