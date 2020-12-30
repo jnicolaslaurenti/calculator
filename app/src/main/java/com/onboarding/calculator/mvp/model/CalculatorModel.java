@@ -68,7 +68,6 @@ public class CalculatorModel implements CalculatorContract.Model {
         } else {
             addOperand(value);
         }
-
     }
 
     public void setOperator(String operator) {

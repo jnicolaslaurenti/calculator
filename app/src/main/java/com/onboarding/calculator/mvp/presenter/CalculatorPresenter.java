@@ -32,7 +32,6 @@ public class CalculatorPresenter implements CalculatorContract.Presenter {
         } else {
             view.showError();
         }
-
     }
 
     @Override
