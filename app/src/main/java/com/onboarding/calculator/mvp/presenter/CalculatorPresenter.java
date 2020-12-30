@@ -37,14 +37,14 @@ public class CalculatorPresenter implements CalculatorContract.Presenter {
     @Override
     public void deleteAll() {
         model.reset();
-        view.reset();
+        view.resetResultView();
         view.showDeleteAllMessage();
     }
 
     @Override
     public void delete() {
         model.delete();
-        view.reset();
+        view.resetResultView();
         view.showDeleteMessage();
     }
 

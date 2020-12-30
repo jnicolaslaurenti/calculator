@@ -29,7 +29,7 @@ public interface CalculatorContract {
 
         void showDeleteMessage();
 
-        void reset();
+        void resetResultView();
     }
 
     interface Presenter {

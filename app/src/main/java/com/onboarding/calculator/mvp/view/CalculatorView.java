@@ -51,7 +51,7 @@ public class CalculatorView extends ActivityView implements CalculatorContract.V
         }
     }
 
-    public void reset() {
+    public void resetResultView() {
         binding.textViewResult.setText(RESULT);
     }
 }
