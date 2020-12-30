@@ -9,8 +9,6 @@ import com.onboarding.calculator.databinding.ActivityMainBinding;
 import com.onboarding.calculator.mvp.contract.CalculatorContract;
 import com.onboarding.calculator.mvp.view.base.ActivityView;
 
-import static com.onboarding.calculator.util.ConstantsUtils.RESULT;
-
 public class CalculatorView extends ActivityView implements CalculatorContract.View {
 
     private final ActivityMainBinding binding;
