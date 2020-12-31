@@ -9,8 +9,11 @@ import static com.onboarding.calculator.util.ConstantsUtils.DEFAULT_RESULT;
 import static com.onboarding.calculator.util.ConstantsUtils.DIV;
 import static com.onboarding.calculator.util.ConstantsUtils.EMPTY_OPERAND;
 import static com.onboarding.calculator.util.ConstantsUtils.EMPTY_STRING;
+import static com.onboarding.calculator.util.ConstantsUtils.ERROR_DIVISION_BY_ZERO;
+import static com.onboarding.calculator.util.ConstantsUtils.ERROR_INCOMPLETE_OPERATION;
 import static com.onboarding.calculator.util.ConstantsUtils.FIRST_OPERAND;
 import static com.onboarding.calculator.util.ConstantsUtils.MUL;
+import static com.onboarding.calculator.util.ConstantsUtils.OPERATOR;
 import static com.onboarding.calculator.util.ConstantsUtils.SECOND_OPERAND;
 import static com.onboarding.calculator.util.ConstantsUtils.SUB;
 import static com.onboarding.calculator.util.ConstantsUtils.ZERO_RESULT_STRING;
@@ -22,33 +25,25 @@ public class CalculatorModel implements CalculatorContract.Model {
     private String firstOperand = EMPTY_STRING;
     private String secondOperand = EMPTY_STRING;
     private int switchOp = FIRST_OPERAND;
-
-    private void switchOperand() {
-        if (switchOp == FIRST_OPERAND) {
-            switchOp = SECOND_OPERAND;
-        } else {
-            switchOp = FIRST_OPERAND;
-        }
-
-    }
+    private String error = EMPTY_STRING;
 
     private void addOperand(String value) {
-        switch (switchOp) {
-            case FIRST_OPERAND: {
+        if (switchOp == FIRST_OPERAND) {
+            if (firstOperand.isEmpty()) {
                 if (!firstOperand.equals(ZERO_RESULT_STRING)) {
                     firstOperand += value;
                 } else {
                     firstOperand = value;
                 }
-                break;
+            } else {
+                firstOperand = value;
             }
-            case SECOND_OPERAND: {
-                if (!secondOperand.equals(ZERO_RESULT_STRING)) {
-                    secondOperand += value;
-                } else {
-                    secondOperand = value;
-                }
-                break;
+        } else {
+            switchOp = SECOND_OPERAND;
+            if (!secondOperand.equals(ZERO_RESULT_STRING)) {
+                secondOperand += value;
+            } else {
+                secondOperand = value;
             }
         }
     }
@@ -71,9 +66,7 @@ public class CalculatorModel implements CalculatorContract.Model {
     }
 
     public void setOperator(String operator) {
-        if (this.operator.equals(EMPTY_STRING)) {
-            switchOperand();
-        }
+        switchOp = OPERATOR;
         if (!firstOperand.equals(EMPTY_STRING)) {
             this.operator = operator;
         }
@@ -99,13 +92,30 @@ public class CalculatorModel implements CalculatorContract.Model {
             }
     }
 
+    public void negativeNumbers() {
+        if (firstOperand.isEmpty()) {
+            firstOperand = SUB;
+            switchOp = FIRST_OPERAND;
+        } else {
+            if (operator.isEmpty()) {
+                setOperator(SUB);
+                switchOp = OPERATOR;
+            } else {
+                if (secondOperand.isEmpty()) {
+                    secondOperand = SUB;
+                    switchOp = SECOND_OPERAND;
+                }
+            }
+        }
+    }
+
     @Override
     public Double getResult() {
         Double result = DEFAULT_RESULT;
         if (!firstOperand.equals(EMPTY_STRING)) {
             result = Double.parseDouble(firstOperand);
         }
-        if (!firstOperand.equals(EMPTY_STRING) && !secondOperand.equals(EMPTY_STRING)) {
+        if (!firstOperand.isEmpty() && !secondOperand.isEmpty()) {
             switch (operator) {
                 case ADD: {
                     result = Double.parseDouble(firstOperand) + Double.parseDouble(secondOperand);
@@ -124,6 +134,7 @@ public class CalculatorModel implements CalculatorContract.Model {
                         result = Double.parseDouble(firstOperand) / Double.parseDouble(secondOperand);
                     } else {
                         result = null;
+                        error = ERROR_DIVISION_BY_ZERO;
                     }
                     break;
                 }
@@ -132,22 +143,35 @@ public class CalculatorModel implements CalculatorContract.Model {
                     break;
                 }
             }
+        } else {
+            error = ERROR_INCOMPLETE_OPERATION;
         }
         reset();
+        firstOperand = result.toString();
         return result;
     }
 
-    @Override
-    public String getOperator() {
-        return operator;
+    public String getError() {
+        return error;
     }
 
     @Override
     public String getLastModified() {
-        if (switchOp == FIRST_OPERAND) {
-            return firstOperand;
-        } else {
-            return secondOperand;
+        String lastModified = "";
+        switch (switchOp) {
+            case (FIRST_OPERAND): {
+                lastModified = firstOperand;
+                break;
+            }
+            case (OPERATOR): {
+                lastModified = operator;
+                break;
+            }
+            case (SECOND_OPERAND): {
+                lastModified = secondOperand;
+                break;
+            }
         }
+        return lastModified;
     }
 }

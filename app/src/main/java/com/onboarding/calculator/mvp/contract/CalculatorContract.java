@@ -11,7 +11,9 @@ public interface CalculatorContract {
 
         Double getResult();
 
-        String getOperator();
+        void negativeNumbers();
+
+        String getError();
 
         void reset();
 
@@ -21,7 +23,7 @@ public interface CalculatorContract {
     interface View {
         void showValues(String value);
 
-        void showError();
+        void showError(String error);
 
         void showOperator(String value);
 
@@ -36,6 +38,8 @@ public interface CalculatorContract {
         void onCalculatorButtonPressed(String buttonText);
 
         void onOperatorButtonPressed(String operator);
+
+        void onSubtractionButtonPressed();
 
         void onEqualsButtonPressed();
 
