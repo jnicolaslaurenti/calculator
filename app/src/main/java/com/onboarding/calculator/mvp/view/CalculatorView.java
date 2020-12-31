@@ -9,9 +9,6 @@ import com.onboarding.calculator.databinding.ActivityMainBinding;
 import com.onboarding.calculator.mvp.contract.CalculatorContract;
 import com.onboarding.calculator.mvp.view.base.ActivityView;
 
-import static com.onboarding.calculator.util.ConstantsUtils.ERROR_DIVISION_BY_ZERO;
-import static com.onboarding.calculator.util.ConstantsUtils.ERROR_INCOMPLETE_OPERATION;
-
 public class CalculatorView extends ActivityView implements CalculatorContract.View {
 
     private final ActivityMainBinding binding;
@@ -27,15 +24,12 @@ public class CalculatorView extends ActivityView implements CalculatorContract.V
     }
 
     @Override
-    public void showError(String error) {
-        switch (error) {
-            case (ERROR_DIVISION_BY_ZERO): {
-                binding.textViewResult.setText(R.string.calculator_error_division_by_zero);
-            }
-            case (ERROR_INCOMPLETE_OPERATION): {
-                binding.textViewResult.setText(R.string.calculator_error_incomplete_operation);
-            }
-        }
+    public void showDivisionByZeroError() {
+        binding.textViewResult.setText(R.string.calculator_error_division_by_zero);
+    }
+
+    public void showIncompleteOperation() {
+        binding.textViewResult.setText(R.string.calculator_error_division_by_zero);
     }
 
     @Override

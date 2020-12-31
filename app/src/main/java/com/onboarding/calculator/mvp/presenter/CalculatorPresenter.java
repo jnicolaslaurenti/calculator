@@ -26,17 +26,27 @@ public class CalculatorPresenter implements CalculatorContract.Presenter {
 
     @Override
     public void onSubtractionButtonPressed() {
-        model.negativeNumbers();
+        model.manageMinusOperator();
         view.showValues(model.getLastModified());
     }
 
     @Override
     public void onEqualsButtonPressed() {
         Double result = model.getResult();
-        if (model.getError().isEmpty())
-            view.showValues(result.toString());
-        else
-            view.showError(model.getError());
+        switch (model.getError()) {
+            case NONE: {
+                view.showValues(result.toString());
+                break;
+            }
+            case ERROR_DIVISION_BY_ZERO: {
+                view.showDivisionByZeroError();
+                break;
+            }
+            case ERROR_INCOMPLETE_OPERATION: {
+                view.showIncompleteOperation();
+                break;
+            }
+        }
     }
 
     @Override

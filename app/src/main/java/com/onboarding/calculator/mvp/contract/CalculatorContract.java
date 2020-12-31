@@ -1,5 +1,7 @@
 package com.onboarding.calculator.mvp.contract;
 
+import com.onboarding.calculator.util.ConstantsUtils;
+
 public interface CalculatorContract {
 
     interface Model {
@@ -11,9 +13,9 @@ public interface CalculatorContract {
 
         Double getResult();
 
-        void negativeNumbers();
+        void manageMinusOperator();
 
-        String getError();
+        ConstantsUtils.Error getError();
 
         void reset();
 
@@ -23,7 +25,6 @@ public interface CalculatorContract {
     interface View {
         void showValues(String value);
 
-        void showError(String error);
 
         void showOperator(String value);
 
@@ -32,6 +33,10 @@ public interface CalculatorContract {
         void showDeleteMessage();
 
         void resetResultView();
+
+        void showDivisionByZeroError();
+
+        void showIncompleteOperation();
     }
 
     interface Presenter {
