@@ -5,9 +5,13 @@ public interface CalculatorContract {
     interface Model {
         void setValues(String value);
 
+        void setOperator(String value);
+
         String getLastModified();
 
         Double getResult();
+
+        String getOperator();
 
         void reset();
 
@@ -19,13 +23,19 @@ public interface CalculatorContract {
 
         void showError();
 
+        void showOperator(String value);
+
         void showDeleteAllMessage();
 
         void showDeleteMessage();
+
+        void resetResultView();
     }
 
     interface Presenter {
         void onCalculatorButtonPressed(String buttonText);
+
+        void onOperatorButtonPressed(String operator);
 
         void onEqualsButtonPressed();
 

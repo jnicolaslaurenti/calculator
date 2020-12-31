@@ -19,6 +19,12 @@ public class CalculatorPresenter implements CalculatorContract.Presenter {
     }
 
     @Override
+    public void onOperatorButtonPressed(String buttonText) {
+        model.setOperator(buttonText);
+        view.showOperator(model.getOperator());
+    }
+
+    @Override
     public void onEqualsButtonPressed() {
         Double result = model.getResult();
         if (result != null) {
@@ -26,20 +32,19 @@ public class CalculatorPresenter implements CalculatorContract.Presenter {
         } else {
             view.showError();
         }
-
     }
 
     @Override
     public void deleteAll() {
         model.reset();
-        view.showValues(model.getLastModified());
+        view.resetResultView();
         view.showDeleteAllMessage();
     }
 
     @Override
     public void delete() {
         model.delete();
-        view.showValues(model.getLastModified());
+        view.resetResultView();
         view.showDeleteMessage();
     }
 

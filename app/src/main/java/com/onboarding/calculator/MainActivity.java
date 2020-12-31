@@ -25,10 +25,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setListeners() {
-        binding.buttonAdd.setOnClickListener(view -> presenter.onCalculatorButtonPressed(binding.buttonAdd.getText().toString()));
-        binding.buttonSubtraction.setOnClickListener(view -> presenter.onCalculatorButtonPressed(binding.buttonSubtraction.getText().toString()));
-        binding.buttonMultiply.setOnClickListener(view -> presenter.onCalculatorButtonPressed(binding.buttonMultiply.getText().toString()));
-        binding.buttonDivision.setOnClickListener(view -> presenter.onCalculatorButtonPressed(binding.buttonDivision.getText().toString()));
+        binding.buttonAdd.setOnClickListener(view -> presenter.onOperatorButtonPressed(binding.buttonAdd.getText().toString()));
+        binding.buttonSubtraction.setOnClickListener(view -> presenter.onOperatorButtonPressed(binding.buttonSubtraction.getText().toString()));
+        binding.buttonMultiply.setOnClickListener(view -> presenter.onOperatorButtonPressed(binding.buttonMultiply.getText().toString()));
+        binding.buttonDivision.setOnClickListener(view -> presenter.onOperatorButtonPressed(binding.buttonDivision.getText().toString()));
         binding.buttonClean.setOnClickListener(view -> presenter.onCalculatorButtonPressed(binding.buttonClean.getText().toString()));
         binding.buttonZero.setOnClickListener(view -> presenter.onCalculatorButtonPressed(binding.buttonZero.getText().toString()));
         binding.buttonOne.setOnClickListener(view -> presenter.onCalculatorButtonPressed(binding.buttonOne.getText().toString()));
