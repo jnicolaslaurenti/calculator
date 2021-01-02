@@ -1,7 +1,6 @@
 package com.onboarding.calculator.mvp.model;
 
 import com.onboarding.calculator.mvp.contract.CalculatorContract;
-import com.onboarding.calculator.util.ConstantsUtils;
 
 import static com.onboarding.calculator.util.ConstantsUtils.ADD;
 import static com.onboarding.calculator.util.ConstantsUtils.CLEAN;
@@ -10,6 +9,7 @@ import static com.onboarding.calculator.util.ConstantsUtils.DEFAULT_RESULT;
 import static com.onboarding.calculator.util.ConstantsUtils.DIV;
 import static com.onboarding.calculator.util.ConstantsUtils.EMPTY_OPERAND;
 import static com.onboarding.calculator.util.ConstantsUtils.EMPTY_STRING;
+import static com.onboarding.calculator.util.ConstantsUtils.Error;
 import static com.onboarding.calculator.util.ConstantsUtils.FIRST_OPERAND;
 import static com.onboarding.calculator.util.ConstantsUtils.MUL;
 import static com.onboarding.calculator.util.ConstantsUtils.OPERATOR;
@@ -17,7 +17,6 @@ import static com.onboarding.calculator.util.ConstantsUtils.SECOND_OPERAND;
 import static com.onboarding.calculator.util.ConstantsUtils.SUB;
 import static com.onboarding.calculator.util.ConstantsUtils.ZERO_RESULT_STRING;
 import static com.onboarding.calculator.util.ConstantsUtils.ZERO_STRING;
-import static com.onboarding.calculator.util.ConstantsUtils.Error;
 
 public class CalculatorModel implements CalculatorContract.Model {
 
