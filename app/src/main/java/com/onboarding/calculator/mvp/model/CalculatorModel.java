@@ -29,7 +29,7 @@ public class CalculatorModel implements CalculatorContract.Model {
 
     private void addOperand(String value) {
         if (switchOp == FIRST_OPERAND) {
-            if (firstOperand.isEmpty() || !firstOperand.equals(ZERO_RESULT_STRING)) {
+            if (firstOperand.isEmpty()) {
                 firstOperand += value;
             } else {
                 firstOperand = value;
@@ -111,7 +111,7 @@ public class CalculatorModel implements CalculatorContract.Model {
         if (!firstOperand.equals(EMPTY_STRING)) {
             result = Double.parseDouble(firstOperand);
         }
-        if (!secondOperand.isEmpty() || !secondOperand.isEmpty()) {
+        if (!firstOperand.isEmpty() || !secondOperand.isEmpty()) {
             switch (operator) {
                 case ADD: {
                     result = Double.parseDouble(firstOperand) + Double.parseDouble(secondOperand);
