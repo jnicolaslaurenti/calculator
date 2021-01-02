@@ -111,7 +111,7 @@ public class CalculatorModel implements CalculatorContract.Model {
         if (!firstOperand.equals(EMPTY_STRING)) {
             result = Double.parseDouble(firstOperand);
         }
-        if (!firstOperand.isEmpty() || !secondOperand.isEmpty()) {
+        if (!firstOperand.isEmpty() && !secondOperand.isEmpty()) {
             switch (operator) {
                 case ADD: {
                     result = Double.parseDouble(firstOperand) + Double.parseDouble(secondOperand);
@@ -141,6 +141,7 @@ public class CalculatorModel implements CalculatorContract.Model {
             }
         } else {
             error = Error.ERROR_INCOMPLETE_OPERATION;
+            result = null;
         }
         reset();
         if (result != null) {

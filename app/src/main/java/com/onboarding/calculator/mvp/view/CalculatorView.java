@@ -29,7 +29,7 @@ public class CalculatorView extends ActivityView implements CalculatorContract.V
     }
 
     public void showIncompleteOperation() {
-        binding.textViewResult.setText(R.string.calculator_error_division_by_zero);
+        binding.textViewResult.setText(R.string.calculator_error_incomplete_operation);
     }
 
     @Override
