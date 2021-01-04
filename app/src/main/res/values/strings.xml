@@ -19,7 +19,8 @@
     <string name="activity_main_calculator_add_text">+</string>
     <string name="activity_main_calculator_result_text">Result</string>
     <string name="content_description_icon_calculator">icon_calculator</string>
-    <string name="calculator_error">Error</string>
+    <string name="calculator_error_division_by_zero">Error: division by zero</string>
+    <string name="calculator_error_incomplete_operation">Error: incomplete operation</string>
     <string name="operation_deleted">Operation deleted</string>
     <string name="value_deleted">Value deleted</string>
 

@@ -24,8 +24,20 @@ public class CalculatorView extends ActivityView implements CalculatorContract.V
     }
 
     @Override
-    public void showError() {
-        binding.textViewResult.setText(R.string.calculator_error);
+    public void showDivisionByZeroError() {
+        Context context = getContext();
+        if (context != null) {
+            Toast.makeText(context, context.getString(R.string.calculator_error_division_by_zero), Toast.LENGTH_LONG).show();
+        }
+        binding.textViewResult.setText(R.string.activity_main_calculator_result_text);
+    }
+
+    public void showIncompleteOperation() {
+        Context context = getContext();
+        binding.textViewResult.setText(R.string.activity_main_calculator_result_text);
+        if (context != null) {
+            Toast.makeText(context, context.getString(R.string.calculator_error_incomplete_operation), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

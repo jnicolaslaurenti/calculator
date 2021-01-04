@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setListeners() {
         binding.buttonAdd.setOnClickListener(view -> presenter.onOperatorButtonPressed(binding.buttonAdd.getText().toString()));
-        binding.buttonSubtraction.setOnClickListener(view -> presenter.onOperatorButtonPressed(binding.buttonSubtraction.getText().toString()));
+        binding.buttonSubtraction.setOnClickListener(view -> presenter.onSubtractionButtonPressed());
         binding.buttonMultiply.setOnClickListener(view -> presenter.onOperatorButtonPressed(binding.buttonMultiply.getText().toString()));
         binding.buttonDivision.setOnClickListener(view -> presenter.onOperatorButtonPressed(binding.buttonDivision.getText().toString()));
         binding.buttonClean.setOnClickListener(view -> presenter.onCalculatorButtonPressed(binding.buttonClean.getText().toString()));

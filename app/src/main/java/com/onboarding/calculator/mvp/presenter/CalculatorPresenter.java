@@ -21,16 +21,38 @@ public class CalculatorPresenter implements CalculatorContract.Presenter {
     @Override
     public void onOperatorButtonPressed(String buttonText) {
         model.setOperator(buttonText);
-        view.showOperator(model.getOperator());
+        view.showOperator(model.getLastModified());
+    }
+
+    @Override
+    public void onSubtractionButtonPressed() {
+        model.manageMinusOperator();
+        view.showValues(model.getLastModified());
     }
 
     @Override
     public void onEqualsButtonPressed() {
-        Double result = model.getResult();
-        if (result != null) {
+        if (model.operationEnable()) {
+            Double result = model.getResult();
             view.showValues(result.toString());
         } else {
-            view.showError();
+            if (model.errorIncompleteOPeration()){
+                view.showIncompleteOperation();
+            } else model.errorDivisionByZero();
+        }
+        switch (model.getError()) {
+            case NONE: {
+                view.showValues(result.toString());
+                break;
+            }
+            case ERROR_DIVISION_BY_ZERO: {
+                view.showDivisionByZeroError();
+                break;
+            }
+            case ERROR_INCOMPLETE_OPERATION: {
+                view.showIncompleteOperation();
+                break;
+            }
         }
     }
 
