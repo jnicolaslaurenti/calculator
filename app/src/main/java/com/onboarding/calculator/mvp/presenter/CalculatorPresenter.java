@@ -32,7 +32,14 @@ public class CalculatorPresenter implements CalculatorContract.Presenter {
 
     @Override
     public void onEqualsButtonPressed() {
-        Double result = model.getResult();
+        if (model.operationEnable()) {
+            Double result = model.getResult();
+            view.showValues(result.toString());
+        } else {
+            if (model.errorIncompleteOPeration()){
+                view.showIncompleteOperation();
+            } else model.errorDivisionByZero();
+        }
         switch (model.getError()) {
             case NONE: {
                 view.showValues(result.toString());
