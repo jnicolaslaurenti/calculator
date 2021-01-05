@@ -12,8 +12,6 @@ public class ConstantsUtils {
     public static final String SUB = "-";
     public static final String MUL = "*";
     public static final String DIV = "/";
-    public static final String CLEAN = "C";
-    public static final String ZERO_RESULT_STRING = "0.0";
     public static final String ZERO_STRING = "0";
     public static final int FIRST_OPERAND = 1;
     public static final int OPERATOR = 2;

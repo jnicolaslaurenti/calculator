@@ -1,5 +1,6 @@
 package com.onboarding.calculator.mvp.presenter;
 
+import com.onboarding.calculator.R;
 import com.onboarding.calculator.mvp.contract.CalculatorContract;
 
 public class CalculatorPresenter implements CalculatorContract.Presenter {
@@ -16,41 +17,40 @@ public class CalculatorPresenter implements CalculatorContract.Presenter {
     public void onCalculatorButtonPressed(String buttonText) {
         model.setValues(buttonText);
         view.showValues(model.getLastModified());
+        view.OperationViewUpdate(model.getOperation());
     }
 
     @Override
     public void onOperatorButtonPressed(String buttonText) {
         model.setOperator(buttonText);
         view.showOperator(model.getLastModified());
+        view.OperationViewUpdate(model.getOperation());
     }
 
     @Override
     public void onSubtractionButtonPressed() {
         model.manageMinusOperator();
         view.showValues(model.getLastModified());
+        view.OperationViewUpdate(model.getOperation());
     }
 
     @Override
     public void onEqualsButtonPressed() {
-        if (model.operationEnable()) {
-            Double result = model.getResult();
-            view.showValues(result.toString());
-        } else {
-            if (model.errorIncompleteOPeration()){
-                view.showIncompleteOperation();
-            } else model.errorDivisionByZero();
-        }
+        Double result = model.getResult();
         switch (model.getError()) {
             case NONE: {
                 view.showValues(result.toString());
+                view.OperationViewUpdate(model.getOperation());
                 break;
             }
             case ERROR_DIVISION_BY_ZERO: {
                 view.showDivisionByZeroError();
+                view.resetOperationView();
                 break;
             }
             case ERROR_INCOMPLETE_OPERATION: {
                 view.showIncompleteOperation();
+                view.resetOperationView();
                 break;
             }
         }
@@ -61,6 +61,7 @@ public class CalculatorPresenter implements CalculatorContract.Presenter {
         model.reset();
         view.resetResultView();
         view.showDeleteAllMessage();
+        view.resetOperationView();
     }
 
     @Override
@@ -68,6 +69,7 @@ public class CalculatorPresenter implements CalculatorContract.Presenter {
         model.delete();
         view.resetResultView();
         view.showDeleteMessage();
+        view.resetOperationView();
     }
 
 }

@@ -145,6 +145,10 @@ public class CalculatorModel implements CalculatorContract.Model {
         return aux;
     }
 
+    public String getOperation(){
+        return firstOperand+operator+secondOperand;
+    }
+
     @Override
     public String getLastModified() {
         String lastModified = EMPTY_STRING;
