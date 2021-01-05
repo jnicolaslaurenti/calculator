@@ -1,6 +1,5 @@
 package com.onboarding.calculator.mvp.presenter;
 
-import com.onboarding.calculator.R;
 import com.onboarding.calculator.mvp.contract.CalculatorContract;
 
 public class CalculatorPresenter implements CalculatorContract.Presenter {
