@@ -4,5 +4,9 @@
 	* Calculator UI
 #### 23/12/2020
 	* Show numbers in the calculator
-#### 28/12/2020
-	* Make operations and clean
+#### 30/12/2020
+	* Added improvements in the calculator
+#### 31/12/2020
+	* Added the new improvements in operations and errors
+#### 5/1/2021
+	* Added operation TextView
