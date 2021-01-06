@@ -19,6 +19,16 @@ public class CalculatorView extends ActivityView implements CalculatorContract.V
     }
 
     @Override
+    public void OperationViewUpdate(String operation) {
+        binding.textViewCompleteOperation.setText(operation);
+    }
+
+    @Override
+    public void resetOperationView() {
+        binding.textViewCompleteOperation.setText(R.string.activity_main_calculator_empty_operation);
+    }
+
+    @Override
     public void showValues(String value) {
         binding.textViewResult.setText(value);
     }
@@ -26,15 +36,17 @@ public class CalculatorView extends ActivityView implements CalculatorContract.V
     @Override
     public void showDivisionByZeroError() {
         Context context = getContext();
+        binding.textViewResult.setText(R.string.activity_main_calculator_result_text);
+        binding.textViewCompleteOperation.setText(R.string.activity_main_calculator_empty_operation);
         if (context != null) {
             Toast.makeText(context, context.getString(R.string.calculator_error_division_by_zero), Toast.LENGTH_LONG).show();
         }
-        binding.textViewResult.setText(R.string.activity_main_calculator_result_text);
     }
 
     public void showIncompleteOperation() {
         Context context = getContext();
         binding.textViewResult.setText(R.string.activity_main_calculator_result_text);
+        binding.textViewCompleteOperation.setText(R.string.activity_main_calculator_empty_operation);
         if (context != null) {
             Toast.makeText(context, context.getString(R.string.calculator_error_incomplete_operation), Toast.LENGTH_SHORT).show();
         }

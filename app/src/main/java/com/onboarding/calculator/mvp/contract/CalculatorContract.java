@@ -20,11 +20,14 @@ public interface CalculatorContract {
         void reset();
 
         void delete();
+
+        String getOperation();
     }
 
     interface View {
         void showValues(String value);
 
+        void OperationViewUpdate(String operation);
 
         void showOperator(String value);
 
@@ -37,6 +40,8 @@ public interface CalculatorContract {
         void showDivisionByZeroError();
 
         void showIncompleteOperation();
+
+        void resetOperationView();
     }
 
     interface Presenter {

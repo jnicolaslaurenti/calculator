@@ -134,9 +134,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_bottom_button_small"
         android:text="@string/activity_main_calculator_zero_text"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/button_clean" />
+        app:layout_constraintEnd_toStartOf="@id/button_clean"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button_clean"
@@ -204,6 +204,19 @@
         app:layout_constraintBottom_toTopOf="@id/button_seven"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guideline_title" />
+
+
+    <TextView
+        android:id="@+id/text_view_complete_operation"
+        style="@style/complete_operation_style"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/margin_bottom_result_xbig"
+        android:text="@string/activity_main_calculator_empty_operation"
+        app:layout_constraintBottom_toBottomOf="@id/text_view_result"
+        app:layout_constraintEnd_toEndOf="@id/text_view_result"
+        app:layout_constraintStart_toStartOf="@id/text_view_result"
+        app:layout_constraintTop_toTopOf="@id/text_view_result" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_title"
