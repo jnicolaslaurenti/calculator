@@ -156,10 +156,10 @@ public class CalculatorTest {
     public void operationWithoutErrors() {
         model.setValues(ONE_STRING_TEST);
         model.setOperator(MUL);
-        model.setValues(TWO_STRING_TEST);
+        model.setValues(THREE_STRING_TEST);
         Double result = model.getResult();
         presenter.onEqualsButtonPressed();
-        assertEquals(Double.valueOf(2), result);
+        assertEquals(THREE_RESULT_DOUBLE_TEST, result);
         verify(view).showValues(result.toString());
         verify(view).operationViewUpdate(result.toString());
         verifyNoMoreInteractions(view);
