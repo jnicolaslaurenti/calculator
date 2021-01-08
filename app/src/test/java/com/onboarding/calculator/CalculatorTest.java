@@ -13,7 +13,8 @@ import static com.onboarding.calculator.util.ConstantsUtils.EMPTY_STRING;
 import static com.onboarding.calculator.util.ConstantsUtils.Error;
 import static com.onboarding.calculator.util.ConstantsUtils.MUL;
 import static com.onboarding.calculator.util.ConstantsUtils.ONE_STRING_TEST;
-import static com.onboarding.calculator.util.ConstantsUtils.OPERATION_CLEAN_A_VALUE_TEST;
+import static com.onboarding.calculator.util.ConstantsUtils.OPERATION_CLEAN_A_VALUE_IN_SECOND_OPERAND_TEST;
+import static com.onboarding.calculator.util.ConstantsUtils.OPERATION_CLEAN_OPERATOR_TEST;
 import static com.onboarding.calculator.util.ConstantsUtils.OPERATION_MINUS_IN_OPERATOR_TEST;
 import static com.onboarding.calculator.util.ConstantsUtils.OPERATION_MINUS_IN_SECOND_OPERAND_TEST;
 import static com.onboarding.calculator.util.ConstantsUtils.SUB;
@@ -85,7 +86,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void CleanAValue() {
+    public void CleanAValueInSecondOperand() {
         model.setValues(ONE_STRING_TEST);
         model.setOperator(MUL);
         model.setValues(TWO_STRING_TEST);
@@ -94,7 +95,33 @@ public class CalculatorTest {
         verify(view).resetResultView();
         verify(view).showDeleteMessage();
         verify(view).operationViewUpdate(model.getOperation());
-        assertEquals(OPERATION_CLEAN_A_VALUE_TEST, model.getOperation());
+        assertEquals(OPERATION_CLEAN_A_VALUE_IN_SECOND_OPERAND_TEST, model.getOperation());
+        verifyNoMoreInteractions(view);
+    }
+
+    @Test
+    public void CleanAValueInFirstOperand() {
+        model.setValues(ONE_STRING_TEST);
+        model.setValues(TWO_STRING_TEST);
+        presenter.delete();
+        verify(view).resetResultView();
+        verify(view).showDeleteMessage();
+        verify(view).operationViewUpdate(model.getOperation());
+        assertEquals(ONE_STRING_TEST, model.getOperation());
+        verifyNoMoreInteractions(view);
+    }
+
+    @Test
+    public void CleanOperator() {
+        model.setValues(ONE_STRING_TEST);
+        model.setOperator(MUL);
+        model.setValues(TWO_STRING_TEST);
+        model.setValues(THREE_STRING_TEST);
+        presenter.delete();
+        verify(view).resetResultView();
+        verify(view).showDeleteMessage();
+        verify(view).operationViewUpdate(model.getOperation());
+        assertEquals(OPERATION_CLEAN_OPERATOR_TEST, model.getOperation());
         verifyNoMoreInteractions(view);
     }
 
