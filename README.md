@@ -10,3 +10,5 @@
 	* Added the new improvements in operations and errors
 #### 5/1/2021
 	* Added operation TextView
+#### 8/1/2021
+	* Added the tests
