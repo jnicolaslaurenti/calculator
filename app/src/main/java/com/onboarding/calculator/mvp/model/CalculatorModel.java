@@ -30,6 +30,7 @@ public class CalculatorModel implements CalculatorContract.Model {
         operator = EMPTY_STRING;
         firstOperand = EMPTY_STRING;
         secondOperand = EMPTY_STRING;
+        error = Error.NONE;
     }
 
     @Override
@@ -89,60 +90,58 @@ public class CalculatorModel implements CalculatorContract.Model {
     }
 
     private boolean operationEnabled() {
-        return (operandEnabled(firstOperand) && operandEnabled(secondOperand) && !operator.isEmpty());
+        boolean operationEnabled = true;
+        if (getError() == Error.ERROR_DIVISION_BY_ZERO || getError() == Error.ERROR_INCOMPLETE_OPERATION) {
+            operationEnabled = false;
+        }
+        return operationEnabled;
+    }
+
+
+    private Double makeOperation() {
+        Double result = DEFAULT_RESULT;
+        switch (operator) {
+            case ADD: {
+                result = Double.parseDouble(firstOperand) + Double.parseDouble(secondOperand);
+                break;
+            }
+            case SUB: {
+                result = Double.parseDouble(firstOperand) - Double.parseDouble(secondOperand);
+                break;
+            }
+            case MUL: {
+                result = Double.parseDouble(firstOperand) * Double.parseDouble(secondOperand);
+                break;
+            }
+            case DIV: {
+                result = Double.parseDouble(firstOperand) / Double.parseDouble(secondOperand);
+                break;
+            }
+            case EMPTY_STRING: {
+                result = Double.parseDouble(firstOperand);
+                break;
+            }
+        }
+        return result;
     }
 
     @Override
     public Double getResult() {
-        Double result = DEFAULT_RESULT;
-        if (!firstOperand.equals(EMPTY_STRING) && !firstOperand.equals(SUB)) {
-            result = Double.parseDouble(firstOperand);
-        }
+        Double result = null;
         if (operationEnabled()) {
-            switch (operator) {
-                case ADD: {
-                    result = Double.parseDouble(firstOperand) + Double.parseDouble(secondOperand);
-                    break;
-                }
-                case SUB: {
-                    result = Double.parseDouble(firstOperand) - Double.parseDouble(secondOperand);
-                    break;
-                }
-                case MUL: {
-                    result = Double.parseDouble(firstOperand) * Double.parseDouble(secondOperand);
-                    break;
-                }
-                case DIV: {
-                    if (!secondOperand.equals(ZERO_STRING)) {
-                        result = Double.parseDouble(firstOperand) / Double.parseDouble(secondOperand);
-                    } else {
-                        result = null;
-                        error = Error.ERROR_DIVISION_BY_ZERO;
-                    }
-                    break;
-                }
-                case EMPTY_STRING: {
-                    result = Double.parseDouble(firstOperand);
-                    break;
-                }
-            }
-        } else {
-            error = Error.ERROR_INCOMPLETE_OPERATION;
-            result = null;
-        }
-        reset();
-        if (result != null) {
-            firstOperand = result.toString();
-            operator = EMPTY_STRING;
-            switchOp = OPERATOR;
+            result = makeOperation();
         }
         return result;
     }
 
     public Error getError() {
-        Error aux = error;
-        error = Error.NONE;
-        return aux;
+        if (!operandEnabled(firstOperand) || !operandEnabled(secondOperand)) {
+            error = Error.ERROR_INCOMPLETE_OPERATION;
+        }
+        if (operandEnabled(firstOperand) && (operator.equals(DIV)) && (secondOperand.equals(ZERO_STRING))) {
+            error = Error.ERROR_DIVISION_BY_ZERO;
+        }
+        return error;
     }
 
     public String getOperation() {
