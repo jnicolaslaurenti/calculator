@@ -115,13 +115,11 @@ public class CalculatorTest {
     public void CleanOperator() {
         model.setValues(ONE_STRING_TEST);
         model.setOperator(MUL);
-        model.setValues(TWO_STRING_TEST);
-        model.setValues(THREE_STRING_TEST);
         presenter.delete();
         verify(view).resetResultView();
         verify(view).showDeleteMessage();
         verify(view).operationViewUpdate(model.getOperation());
-        assertEquals(OPERATION_CLEAN_OPERATOR_TEST, model.getOperation());
+        assertEquals(ONE_STRING_TEST, model.getOperation());
         verifyNoMoreInteractions(view);
     }
 
