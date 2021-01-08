@@ -20,8 +20,6 @@ public class ConstantsUtils {
     public static final int CORRECTION_FACTOR = 1;
     public static final double DEFAULT_RESULT = 0.0;
 
-    //TEST
-
     public static final String ZERO_STRING_TEST = "0";
     public static final String ONE_STRING_TEST = "1";
     public static final String TWO_STRING_TEST = "2";
