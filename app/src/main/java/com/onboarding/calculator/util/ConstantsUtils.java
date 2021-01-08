@@ -26,6 +26,10 @@ public class ConstantsUtils {
     public static final String ONE_STRING_TEST = "1";
     public static final String TWO_STRING_TEST = "2";
     public static final String THREE_STRING_TEST = "3";
+    public static final String FOUR_STRING_TEST = "4";
+    public static final Double ONE_RESULT_DOUBLE_TEST = 1.0;
+    public static final Double TWO_RESULT_DOUBLE_TEST = 2.0;
+    public static final Double THREE_RESULT_DOUBLE_TEST = 3.0;
     public static final String OPERATION_MINUS_IN_SECOND_OPERAND_TEST = "1*-";
     public static final String OPERATION_MINUS_IN_OPERATOR_TEST = "1-";
     public static final String OPERATION_CLEAN_A_VALUE_IN_SECOND_OPERAND_TEST = "1*2";

@@ -117,10 +117,6 @@ public class CalculatorModel implements CalculatorContract.Model {
                 result = Double.parseDouble(firstOperand) / Double.parseDouble(secondOperand);
                 break;
             }
-            case EMPTY_STRING: {
-                result = Double.parseDouble(firstOperand);
-                break;
-            }
         }
         return result;
     }
@@ -128,6 +124,9 @@ public class CalculatorModel implements CalculatorContract.Model {
     @Override
     public Double getResult() {
         Double result = null;
+        if (!firstOperand.equals(EMPTY_STRING)) {
+            result = Double.parseDouble(firstOperand);
+        }
         if (operationEnabled()) {
             result = makeOperation();
         }

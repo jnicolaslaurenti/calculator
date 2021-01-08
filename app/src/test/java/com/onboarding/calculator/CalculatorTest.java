@@ -11,14 +11,17 @@ import static com.onboarding.calculator.util.ConstantsUtils.ADD;
 import static com.onboarding.calculator.util.ConstantsUtils.DIV;
 import static com.onboarding.calculator.util.ConstantsUtils.EMPTY_STRING;
 import static com.onboarding.calculator.util.ConstantsUtils.Error;
+import static com.onboarding.calculator.util.ConstantsUtils.FOUR_STRING_TEST;
 import static com.onboarding.calculator.util.ConstantsUtils.MUL;
+import static com.onboarding.calculator.util.ConstantsUtils.ONE_RESULT_DOUBLE_TEST;
 import static com.onboarding.calculator.util.ConstantsUtils.ONE_STRING_TEST;
 import static com.onboarding.calculator.util.ConstantsUtils.OPERATION_CLEAN_A_VALUE_IN_SECOND_OPERAND_TEST;
-import static com.onboarding.calculator.util.ConstantsUtils.OPERATION_CLEAN_OPERATOR_TEST;
 import static com.onboarding.calculator.util.ConstantsUtils.OPERATION_MINUS_IN_OPERATOR_TEST;
 import static com.onboarding.calculator.util.ConstantsUtils.OPERATION_MINUS_IN_SECOND_OPERAND_TEST;
 import static com.onboarding.calculator.util.ConstantsUtils.SUB;
+import static com.onboarding.calculator.util.ConstantsUtils.THREE_RESULT_DOUBLE_TEST;
 import static com.onboarding.calculator.util.ConstantsUtils.THREE_STRING_TEST;
+import static com.onboarding.calculator.util.ConstantsUtils.TWO_RESULT_DOUBLE_TEST;
 import static com.onboarding.calculator.util.ConstantsUtils.TWO_STRING_TEST;
 import static com.onboarding.calculator.util.ConstantsUtils.ZERO_STRING_TEST;
 import static org.junit.Assert.assertEquals;
@@ -209,5 +212,47 @@ public class CalculatorTest {
         verify(view).showIncompleteOperation();
         verify(view).resetOperationView();
         verifyNoMoreInteractions(view);
+    }
+
+    @Test
+    public void emptyOperator(){
+        //Set
+        model.setValues(ONE_STRING_TEST);
+        //Test
+        //Assert
+        assertEquals(ONE_RESULT_DOUBLE_TEST, model.getResult());
+    }
+
+    @Test
+    public void addOperator(){
+        //Set
+        model.setValues(ONE_STRING_TEST);
+        model.setOperator(ADD);
+        model.setValues(TWO_STRING_TEST);
+        //Test
+        //Assert
+        assertEquals(THREE_RESULT_DOUBLE_TEST, model.getResult());
+    }
+
+    @Test
+    public void subtractionOperator(){
+        //Set
+        model.setValues(THREE_STRING_TEST);
+        model.setOperator(SUB);
+        model.setValues(ONE_STRING_TEST);
+        //Test
+        //Assert
+        assertEquals(TWO_RESULT_DOUBLE_TEST, model.getResult());
+    }
+
+    @Test
+    public void divisionOperator(){
+        //Set
+        model.setValues(FOUR_STRING_TEST);
+        model.setOperator(DIV);
+        model.setValues(TWO_STRING_TEST);
+        //Test
+        //Assert
+        assertEquals(TWO_RESULT_DOUBLE_TEST, model.getResult());
     }
 }
