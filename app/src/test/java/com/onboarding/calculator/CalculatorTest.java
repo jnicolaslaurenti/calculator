@@ -9,15 +9,18 @@ import org.junit.Test;
 
 import static com.onboarding.calculator.util.ConstantsUtils.ADD;
 import static com.onboarding.calculator.util.ConstantsUtils.DIV;
+import static com.onboarding.calculator.util.ConstantsUtils.ELEVEN_STRING_TEST;
 import static com.onboarding.calculator.util.ConstantsUtils.EMPTY_STRING;
 import static com.onboarding.calculator.util.ConstantsUtils.Error;
 import static com.onboarding.calculator.util.ConstantsUtils.FOUR_STRING_TEST;
 import static com.onboarding.calculator.util.ConstantsUtils.MUL;
+import static com.onboarding.calculator.util.ConstantsUtils.ONE_HUNDRED_ELEVEN_STRING_TEST;
 import static com.onboarding.calculator.util.ConstantsUtils.ONE_RESULT_DOUBLE_TEST;
 import static com.onboarding.calculator.util.ConstantsUtils.ONE_STRING_TEST;
 import static com.onboarding.calculator.util.ConstantsUtils.OPERATION_CLEAN_A_VALUE_IN_SECOND_OPERAND_TEST;
 import static com.onboarding.calculator.util.ConstantsUtils.OPERATION_MINUS_IN_OPERATOR_TEST;
 import static com.onboarding.calculator.util.ConstantsUtils.OPERATION_MINUS_IN_SECOND_OPERAND_TEST;
+import static com.onboarding.calculator.util.ConstantsUtils.OPERATION_REPLACE_OPERATOR_TEST;
 import static com.onboarding.calculator.util.ConstantsUtils.SUB;
 import static com.onboarding.calculator.util.ConstantsUtils.THREE_RESULT_DOUBLE_TEST;
 import static com.onboarding.calculator.util.ConstantsUtils.THREE_STRING_TEST;
@@ -44,9 +47,7 @@ public class CalculatorTest {
 
     @Test
     public void setACorrectOperator() {
-        //Test
         presenter.onOperatorButtonPressed(ADD);
-        //Assert
         assertEquals(ADD, model.getLastModified());
         verify(view).showOperator(model.getLastModified());
         verify(view).operationViewUpdate(model.getLastModified());
@@ -55,9 +56,7 @@ public class CalculatorTest {
 
     @Test
     public void setValuesInFirstOperand() {
-        //Test
         presenter.onCalculatorButtonPressed(ONE_STRING_TEST);
-        //Assert
         assertEquals(ONE_STRING_TEST, model.getLastModified());
         verify(view).showValues(model.getLastModified());
         verify(view).operationViewUpdate(model.getLastModified());
@@ -66,12 +65,9 @@ public class CalculatorTest {
 
     @Test
     public void setValuesInSecondOperand() {
-        //Set
         model.setValues(ONE_STRING_TEST);
         model.setOperator(ADD);
-        //Test
         presenter.onCalculatorButtonPressed(TWO_STRING_TEST);
-        //Assert
         assertEquals(TWO_STRING_TEST, model.getLastModified());
         verify(view).showValues(model.getLastModified());
         verify(view).operationViewUpdate(model.getOperation());
@@ -128,10 +124,7 @@ public class CalculatorTest {
 
     @Test
     public void minusInFirstOperand() {
-        //Set
-        //Test
         presenter.onSubtractionButtonPressed();
-        //Assert
         assertEquals(SUB, model.getOperation());
         verify(view).showValues(model.getLastModified());
         verify(view).operationViewUpdate(model.getOperation());
@@ -140,11 +133,8 @@ public class CalculatorTest {
 
     @Test
     public void minusInOperator() {
-        //Set
         model.setValues(ONE_STRING_TEST);
-        //Test
         presenter.onSubtractionButtonPressed();
-        //Assert
         assertEquals(OPERATION_MINUS_IN_OPERATOR_TEST, model.getOperation());
         verify(view).showValues(model.getLastModified());
         verify(view).operationViewUpdate(model.getOperation());
@@ -153,12 +143,9 @@ public class CalculatorTest {
 
     @Test
     public void minusInSecondOperand() {
-        //Set
         model.setValues(ONE_STRING_TEST);
         model.setOperator(MUL);
-        //Test
         presenter.onSubtractionButtonPressed();
-        //Assert
         assertEquals(OPERATION_MINUS_IN_SECOND_OPERAND_TEST, model.getOperation());
         verify(view).showValues(model.getLastModified());
         verify(view).operationViewUpdate(model.getOperation());
@@ -167,14 +154,11 @@ public class CalculatorTest {
 
     @Test
     public void operationWithoutErrors() {
-        //Set
         model.setValues(ONE_STRING_TEST);
         model.setOperator(MUL);
         model.setValues(TWO_STRING_TEST);
         Double result = model.getResult();
-        //Test
         presenter.onEqualsButtonPressed();
-        //Assert
         assertEquals(Double.valueOf(2), result);
         verify(view).showValues(result.toString());
         verify(view).operationViewUpdate(result.toString());
@@ -183,15 +167,12 @@ public class CalculatorTest {
 
     @Test
     public void ErrorByDivisionByZero() {
-        //Set
         Error error;
         model.setValues(ONE_STRING_TEST);
         model.setOperator(DIV);
         model.setValues(ZERO_STRING_TEST);
         error = model.getError();
-        //Test
         presenter.onEqualsButtonPressed();
-        //Assert
         assertEquals(Error.ERROR_DIVISION_BY_ZERO, error);
         verify(view).showDivisionByZeroError();
         verify(view).resetOperationView();
@@ -200,14 +181,11 @@ public class CalculatorTest {
 
     @Test
     public void ErrorIncompleteOperation() {
-        //Set
         Error error;
         model.setValues(ONE_STRING_TEST);
         model.setOperator(DIV);
         error = model.getError();
-        //Test
         presenter.onEqualsButtonPressed();
-        //Assert
         assertEquals(Error.ERROR_INCOMPLETE_OPERATION, error);
         verify(view).showIncompleteOperation();
         verify(view).resetOperationView();
@@ -216,43 +194,73 @@ public class CalculatorTest {
 
     @Test
     public void emptyOperator(){
-        //Set
         model.setValues(ONE_STRING_TEST);
-        //Test
-        //Assert
         assertEquals(ONE_RESULT_DOUBLE_TEST, model.getResult());
     }
 
     @Test
     public void addOperator(){
-        //Set
         model.setValues(ONE_STRING_TEST);
         model.setOperator(ADD);
         model.setValues(TWO_STRING_TEST);
-        //Test
-        //Assert
         assertEquals(THREE_RESULT_DOUBLE_TEST, model.getResult());
     }
 
     @Test
     public void subtractionOperator(){
-        //Set
         model.setValues(THREE_STRING_TEST);
         model.setOperator(SUB);
         model.setValues(ONE_STRING_TEST);
-        //Test
-        //Assert
         assertEquals(TWO_RESULT_DOUBLE_TEST, model.getResult());
     }
 
     @Test
     public void divisionOperator(){
-        //Set
         model.setValues(FOUR_STRING_TEST);
         model.setOperator(DIV);
         model.setValues(TWO_STRING_TEST);
-        //Test
-        //Assert
         assertEquals(TWO_RESULT_DOUBLE_TEST, model.getResult());
     }
+
+    @Test
+    public void concatenateValuesInFirstOperand(){
+        model.setValues(ONE_STRING_TEST);
+        assertEquals(ONE_STRING_TEST, model.getLastModified());
+        model.setValues(ONE_STRING_TEST);
+        assertEquals(ELEVEN_STRING_TEST, model.getLastModified());
+        model.setValues(ONE_STRING_TEST);
+        assertEquals(ONE_HUNDRED_ELEVEN_STRING_TEST, model.getLastModified());
+    }
+
+    @Test
+    public void concatenateValuesInSecondOperand(){
+        model.setValues(ONE_STRING_TEST);
+        model.setOperator(MUL);
+        model.setValues(ONE_STRING_TEST);
+        assertEquals(ONE_STRING_TEST, model.getLastModified());
+        model.setValues(ONE_STRING_TEST);
+        assertEquals(ELEVEN_STRING_TEST, model.getLastModified());
+        model.setValues(ONE_STRING_TEST);
+        assertEquals(ONE_HUNDRED_ELEVEN_STRING_TEST, model.getLastModified());
+    }
+
+    @Test
+    public void replaceOperator(){
+        model.setValues(ONE_STRING_TEST);
+        model.setOperator(MUL);
+        model.setValues(TWO_STRING_TEST);
+        model.setOperator(ADD);
+        assertEquals(OPERATION_REPLACE_OPERATOR_TEST,model.getOperation());
+    }
+
+    @Test
+    public void correctlyReturnsTheLastModified(){
+        model.setValues(ONE_STRING_TEST);
+        assertEquals(ONE_STRING_TEST,model.getLastModified());
+        model.setOperator(MUL);
+        assertEquals(MUL, model.getLastModified());
+        model.setValues(TWO_STRING_TEST);
+        assertEquals(TWO_STRING_TEST, model.getLastModified());
+    }
+
 }

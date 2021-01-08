@@ -149,21 +149,16 @@ public class CalculatorModel implements CalculatorContract.Model {
 
     @Override
     public String getLastModified() {
-        String lastModified = EMPTY_STRING;
         switch (switchOp) {
-            case (FIRST_OPERAND): {
-                lastModified = firstOperand;
-                break;
-            }
             case (OPERATOR): {
-                lastModified = operator;
-                break;
+                return operator;
             }
             case (SECOND_OPERAND): {
-                lastModified = secondOperand;
-                break;
+                return secondOperand;
+            }
+            default: {
+                return firstOperand;
             }
         }
-        return lastModified;
     }
 }
