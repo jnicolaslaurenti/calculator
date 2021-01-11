@@ -18,22 +18,5 @@ public class ConstantsUtils {
     public static final int SECOND_OPERAND = 3;
     public static final int EMPTY_OPERAND = 0;
     public static final int CORRECTION_FACTOR = 1;
-    public static final double DEFAULT_RESULT = 0.0;
-
-    public static final String ZERO_STRING_TEST = "0";
-    public static final String ONE_STRING_TEST = "1";
-    public static final String TWO_STRING_TEST = "2";
-    public static final String THREE_STRING_TEST = "3";
-    public static final String FOUR_STRING_TEST = "4";
-    public static final String ELEVEN_STRING_TEST = "11";
-    public static final String ONE_HUNDRED_ELEVEN_STRING_TEST = "111";
-    public static final Double ONE_RESULT_DOUBLE_TEST = 1.0;
-    public static final Double TWO_RESULT_DOUBLE_TEST = 2.0;
-    public static final Double THREE_RESULT_DOUBLE_TEST = 3.0;
-    public static final String OPERATION_MINUS_IN_SECOND_OPERAND_TEST = "1*-";
-    public static final String OPERATION_MINUS_IN_OPERATOR_TEST = "1-";
-    public static final String OPERATION_CLEAN_A_VALUE_IN_SECOND_OPERAND_TEST = "1*2";
-    public static final String OPERATION_REPLACE_OPERATOR_TEST = "1+2";
-    public static final String OPERATION_CLEAN_OPERATOR_TEST = "1*2";
 
 }

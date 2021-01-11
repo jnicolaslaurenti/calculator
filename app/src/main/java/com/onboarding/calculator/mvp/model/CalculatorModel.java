@@ -4,7 +4,6 @@ import com.onboarding.calculator.mvp.contract.CalculatorContract;
 
 import static com.onboarding.calculator.util.ConstantsUtils.ADD;
 import static com.onboarding.calculator.util.ConstantsUtils.CORRECTION_FACTOR;
-import static com.onboarding.calculator.util.ConstantsUtils.DEFAULT_RESULT;
 import static com.onboarding.calculator.util.ConstantsUtils.DIV;
 import static com.onboarding.calculator.util.ConstantsUtils.EMPTY_OPERAND;
 import static com.onboarding.calculator.util.ConstantsUtils.EMPTY_STRING;
@@ -99,26 +98,22 @@ public class CalculatorModel implements CalculatorContract.Model {
 
 
     private Double makeOperation() {
-        Double result = DEFAULT_RESULT;
         switch (operator) {
             case ADD: {
-                result = Double.parseDouble(firstOperand) + Double.parseDouble(secondOperand);
-                break;
+                return Double.parseDouble(firstOperand) + Double.parseDouble(secondOperand);
             }
             case SUB: {
-                result = Double.parseDouble(firstOperand) - Double.parseDouble(secondOperand);
-                break;
+                return Double.parseDouble(firstOperand) - Double.parseDouble(secondOperand);
+
             }
             case MUL: {
-                result = Double.parseDouble(firstOperand) * Double.parseDouble(secondOperand);
-                break;
+                return Double.parseDouble(firstOperand) * Double.parseDouble(secondOperand);
             }
             case DIV: {
-                result = Double.parseDouble(firstOperand) / Double.parseDouble(secondOperand);
-                break;
+                return Double.parseDouble(firstOperand) / Double.parseDouble(secondOperand);
             }
         }
-        return result;
+        return null;
     }
 
     @Override
