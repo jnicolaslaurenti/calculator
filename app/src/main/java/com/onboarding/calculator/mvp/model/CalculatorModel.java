@@ -114,7 +114,7 @@ public class CalculatorModel implements CalculatorContract.Model {
                 return Double.parseDouble(firstOperand) / Double.parseDouble(secondOperand);
             }
         }
-        return null;
+        return DEFAULT_RESULT;
     }
 
     @Override
