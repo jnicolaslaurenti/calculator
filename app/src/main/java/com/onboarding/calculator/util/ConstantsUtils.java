@@ -18,5 +18,6 @@ public class ConstantsUtils {
     public static final int SECOND_OPERAND = 3;
     public static final int EMPTY_OPERAND = 0;
     public static final int CORRECTION_FACTOR = 1;
+    public static final double DEFAULT_RESULT = 0.0;
 
 }

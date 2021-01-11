@@ -4,6 +4,7 @@ import com.onboarding.calculator.mvp.contract.CalculatorContract;
 
 import static com.onboarding.calculator.util.ConstantsUtils.ADD;
 import static com.onboarding.calculator.util.ConstantsUtils.CORRECTION_FACTOR;
+import static com.onboarding.calculator.util.ConstantsUtils.DEFAULT_RESULT;
 import static com.onboarding.calculator.util.ConstantsUtils.DIV;
 import static com.onboarding.calculator.util.ConstantsUtils.EMPTY_OPERAND;
 import static com.onboarding.calculator.util.ConstantsUtils.EMPTY_STRING;
@@ -118,7 +119,7 @@ public class CalculatorModel implements CalculatorContract.Model {
 
     @Override
     public Double getResult() {
-        Double result = null;
+        Double result = DEFAULT_RESULT;
         if (!firstOperand.equals(EMPTY_STRING)) {
             result = Double.parseDouble(firstOperand);
         }
