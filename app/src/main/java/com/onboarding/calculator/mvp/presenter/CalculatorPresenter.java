@@ -16,21 +16,21 @@ public class CalculatorPresenter implements CalculatorContract.Presenter {
     public void onCalculatorButtonPressed(String buttonText) {
         model.setValues(buttonText);
         view.showValues(model.getLastModified());
-        view.OperationViewUpdate(model.getOperation());
+        view.operationViewUpdate(model.getOperation());
     }
 
     @Override
     public void onOperatorButtonPressed(String buttonText) {
         model.setOperator(buttonText);
         view.showOperator(model.getLastModified());
-        view.OperationViewUpdate(model.getOperation());
+        view.operationViewUpdate(model.getOperation());
     }
 
     @Override
     public void onSubtractionButtonPressed() {
         model.manageMinusOperator();
         view.showValues(model.getLastModified());
-        view.OperationViewUpdate(model.getOperation());
+        view.operationViewUpdate(model.getOperation());
     }
 
     @Override
@@ -39,7 +39,7 @@ public class CalculatorPresenter implements CalculatorContract.Presenter {
         switch (model.getError()) {
             case NONE: {
                 view.showValues(result.toString());
-                view.OperationViewUpdate(model.getOperation());
+                view.operationViewUpdate(result.toString());
                 break;
             }
             case ERROR_DIVISION_BY_ZERO: {
@@ -52,6 +52,10 @@ public class CalculatorPresenter implements CalculatorContract.Presenter {
                 view.resetOperationView();
                 break;
             }
+        }
+        model.reset();
+        if (result != null) {
+            model.setValues(result.toString());
         }
     }
 
@@ -68,7 +72,7 @@ public class CalculatorPresenter implements CalculatorContract.Presenter {
         model.delete();
         view.resetResultView();
         view.showDeleteMessage();
-        view.resetOperationView();
+        view.operationViewUpdate(model.getOperation());
     }
 
 }

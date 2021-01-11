@@ -19,7 +19,7 @@ public class CalculatorView extends ActivityView implements CalculatorContract.V
     }
 
     @Override
-    public void OperationViewUpdate(String operation) {
+    public void operationViewUpdate(String operation) {
         binding.textViewCompleteOperation.setText(operation);
     }
 

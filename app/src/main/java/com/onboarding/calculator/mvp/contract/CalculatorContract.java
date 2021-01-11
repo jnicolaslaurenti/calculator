@@ -27,7 +27,7 @@ public interface CalculatorContract {
     interface View {
         void showValues(String value);
 
-        void OperationViewUpdate(String operation);
+        void operationViewUpdate(String operation);
 
         void showOperator(String value);
 
